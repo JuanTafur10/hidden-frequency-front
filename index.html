@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Frequency | Vinilos y Music Gear</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+
+    <header>
+        <div class = "header-content">
+            <h1>Hidden Frequency</h1>
+            <p>Vinilos underground, pedales y equipo de producción</p>
+        </div>
+        <nav>
+            <ul class = "nav-links">
+                <li><a href="#catalog">Catálogo</a></li>
+                <li><a href="#booking">Reserva de Gear</a></li>
+                <li><button type="button" id="theme-toggle" aria-pressed="false">Modo Oscuro</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id = "catalog">
+            <h2>Catálogo de Equipos y Vinilos</h2>
+
+    <div class="filters">
+    
+        <button type="button" class="filter-btn active" data-category="Todos" aria-pressed="true">Todos</button>
+        <button type="button" class="filter-btn" data-category="Vinilos" aria-pressed="false">Vinilos</button>
+        <button type="button" class="filter-btn" data-category="Pedales" aria-pressed="false">Pedales</button>
+        <button type="button" class="filter-btn" data-category="Instrumentos" aria-pressed="false">Instrumentos</button>
+    </div>
+
+            <div id = "catalog-grid" class = "grid-container"></div>
+        </section>
+
+        <section id = "booking">
+            <h2>Reserva bajo pedido</h2>
+            <p>¿Buscas una edición específica o un pedal difícil de conseguir? Dejanos tus datos.</p>
+
+            <form id = "reservation-form" novalidate>
+
+            <input type="hidden" name="access_key" value= "dfdbf5ee-7eba-4aaf-8eed-9cdf2d823b79">
+            <input type="hidden" name="subject" value="Nueva reserva de Gear en Hidden Frequency">
+
+            <input type="checkbox" name="botcheck" style="display: none;">
+            <input type="hidden" name="autoresponse" value="¡Hola! Hemos recibido tu solicitud de reserva en Hidden Frequency. Revisaremos el catálogo y te contactaremos muy pronto.">
+                <div class = "form-group">
+                    <label for = "name">Nombre completo:</label>
+                    <input type="text" id="name" name="name" autocomplete="name" minlength="3" required aria-describedby="name-error" aria-invalid="false">
+                    <span class="error-msg" id="name-error" aria-live="polite"></span>
+                </div>
+                
+                <div class = "form-group">
+                    <label for = "email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error" aria-invalid="false">
+                    <span class="error-msg" id="email-error" aria-live="polite"></span>
+                </div>
+
+                <div class = "form-group">
+                    <label for = "item">¿Qué vinilo o equipo buscas?</label>
+                    <input type="text" id="item" name="item" minlength="3" required aria-describedby="item-error" aria-invalid="false">
+                    <span class="error-msg" id="item-error" aria-live="polite"></span>
+                </div>
+
+                <button type = "submit">Enviar Solicitud</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hidden Frequency, Todos los derechos reservados.</p>
+    </footer>
+
+    <div id="toast-notification" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="js/products.js" defer></script>
+    <script src="js/main.js" defer></script> 
+
+</body>
+</html>
