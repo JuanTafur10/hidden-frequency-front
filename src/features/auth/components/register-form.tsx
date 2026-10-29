@@ -5,6 +5,8 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/auth-context";
 import { HttpError } from "@/features/common/http";
+import { Button } from "@/features/common/components/button";
+import { Input } from "@/features/common/components/input";
 
 export function RegisterForm() {
   const { register } = useAuth();
@@ -38,17 +40,10 @@ export function RegisterForm() {
 
   return <form onSubmit={submit} noValidate className="space-y-5">
     {notice && <p role="alert" className="text-sm text-rose-600">{notice}</p>}
-    <Field label="Nombre completo" name="name" type="text" autoComplete="name" error={errors.name} />
-    <Field label="Correo electrónico" name="email" type="email" autoComplete="email" error={errors.email} />
-    <Field label="Contraseña" name="password" type="password" autoComplete="new-password" error={errors.password} />
-    <p className="-mt-3 text-xs text-muted">Usa al menos 8 caracteres.</p>
-    <button disabled={busy} className="w-full rounded-lg bg-accent px-5 py-3 font-bold text-white transition hover:bg-rose-700 disabled:opacity-60">{busy ? "Creando cuenta…" : "Crear cuenta"}</button>
+    <Input id="name" name="name" type="text" label="Nombre completo" autoComplete="name" error={errors.name} required />
+    <Input id="email" name="email" type="email" label="Correo electrónico" autoComplete="email" error={errors.email} required />
+    <Input id="password" name="password" type="password" label="Contraseña" autoComplete="new-password" error={errors.password} hint="Usa al menos 8 caracteres." required />
+    <Button type="submit" disabled={busy} className="w-full">{busy ? "Creando cuenta…" : "Crear cuenta"}</Button>
     <p className="text-center text-sm text-muted">¿Ya tienes cuenta? <Link className="font-semibold text-accent hover:underline" href="/login">Ingresar</Link></p>
   </form>;
-}
-
-function Field({ label, name, type, error, autoComplete }: { label: string; name: string; type: string; error?: string; autoComplete: string }) {
-  return <div><label htmlFor={name} className="mb-1.5 block text-sm font-semibold">{label}</label>
-    <input id={name} name={name} type={type} required autoComplete={autoComplete} aria-invalid={Boolean(error)} aria-describedby={error ? `${name}-error` : undefined} className="w-full rounded-lg border border-zinc-300 bg-transparent px-4 py-3 outline-none focus:border-accent dark:border-zinc-600" />
-    {error && <p id={`${name}-error`} role="alert" className="mt-1 text-sm text-rose-600">{error}</p>}</div>;
 }
