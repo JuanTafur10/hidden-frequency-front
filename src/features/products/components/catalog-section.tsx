@@ -7,7 +7,7 @@ import { ProductCard } from "./product-card";
 import { Pagination } from "@/features/common/components/pagination";
 
 export function CatalogSection({ onReserve }: { onReserve: (product: Product) => void }) {
-  const { page, result, error, loading } = useProducts();
+  const { result, error, loading } = useProducts();
   return <section id="catalogo" className="mb-16 scroll-mt-28">
     <div className="mb-5">
       <p className="mb-1 text-xs font-bold uppercase tracking-[.2em] text-accent">Selección independiente</p>
