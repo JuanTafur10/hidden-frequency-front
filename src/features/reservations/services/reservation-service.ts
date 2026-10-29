@@ -1,6 +1,6 @@
 import { http } from "@/features/common/http";
 import type { Page } from "@/features/common/domain/pagination";
-import type { Reservation, ReservationInput } from "../domain/reservation";
+import type { Reservation, ReservationInput, ReservationUpdateInput } from "../domain/reservation";
 
 export const reservationService = {
   create(input: ReservationInput) {
@@ -11,5 +11,11 @@ export const reservationService = {
   },
   all(page = 1, limit = 10) {
     return http<Page<Reservation>>(`reservations?page=${page}&limit=${limit}`);
+  },
+  update(id: string, input: ReservationUpdateInput) {
+    return http<{ data: Reservation }>(`reservations/${encodeURIComponent(id)}`, { method: "PUT", body: JSON.stringify(input) });
+  },
+  remove(id: string) {
+    return http<void>(`reservations/${encodeURIComponent(id)}`, { method: "DELETE" });
   }
 };

@@ -4,6 +4,11 @@ export interface ReservationInput {
   notes?: string;
 }
 
+export interface ReservationUpdateInput {
+  requestedItem?: string;
+  notes?: string | null;
+}
+
 export interface Reservation {
   id: string;
   userId: string;
