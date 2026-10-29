@@ -46,7 +46,12 @@ export function AdminProductForm({ product, busy, onSave, onCancel, uploadImage 
       setNotice(product ? "Producto actualizado." : "Producto creado.");
       if (!product) form.reset();
     } catch (error) {
-      if (error instanceof HttpError) setErrors({ ...error.fields, ...(error.status === 503 ? { imageUrl: error.message } : {}) });
+      if (error instanceof HttpError) {
+        const fieldErrors = { ...error.fields };
+        if (file instanceof File && file.size && !Object.keys(fieldErrors).length) fieldErrors.imageFile = error.message;
+        if (Object.keys(fieldErrors).length) setErrors(fieldErrors);
+        else setNotice(error.message);
+      }
       else setNotice(error instanceof Error ? error.message : "No se pudo guardar el producto.");
     } finally { setUploading(false); }
   }
@@ -67,6 +72,7 @@ export function AdminProductForm({ product, busy, onSave, onCancel, uploadImage 
     <div><label htmlFor="imageFile" className="mb-1 block text-sm font-semibold">O subir una imagen (JPG, PNG o WebP; hasta 5 MB)</label>
       <input id="imageFile" name="imageFile" type="file" accept="image/jpeg,image/png,image/webp" className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-200 file:px-4 file:py-2 dark:file:bg-zinc-700" />
       {uploading && <p aria-live="polite" className="mt-1 text-sm text-muted">Subiendo imagen…</p>}</div>
+      {errors.imageFile && <FieldError message={errors.imageFile} />}
     <div className="flex flex-wrap gap-3">
       <button disabled={busy || uploading} className="rounded-lg bg-accent px-5 py-2.5 font-bold text-white disabled:opacity-60">{busy || uploading ? "Guardando…" : product ? "Guardar cambios" : "Crear producto"}</button>
       {product && <button type="button" onClick={onCancel} className="rounded-lg border border-zinc-300 px-5 py-2.5 font-bold dark:border-zinc-600">Cancelar</button>}
