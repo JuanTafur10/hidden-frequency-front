@@ -3,7 +3,7 @@ import { API_BASE_URL, SESSION_COOKIE, USER_COOKIE } from "@/features/common/con
 import type { User } from "@/features/auth/domain/auth";
 
 type RouteContext = { params: Promise<{ path: string[] }> };
-const cookieSettings = (expires?: Date) => ({ httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" as const, path: "/", expires });
+const cookieSettings = (expires?: Date) => ({ httpOnly: false, secure: process.env.NODE_ENV === "production", sameSite: "lax" as const, path: "/", expires });
 
 function sessionUser(request: NextRequest): User | null {
   try {
