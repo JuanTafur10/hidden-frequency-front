@@ -93,12 +93,7 @@ Usé IA como apoyo para organizar la migración por features, conectar los servi
 
 ## Evidencia de una petición protegida en Network
 
-La captura debe mostrar una solicitud protegida —por ejemplo `GET /api/reservations/mias`— y el encabezado `Authorization: Bearer …` en **Request Headers**. Oculta el valor completo del token antes de guardar o compartir la imagen.
+La captura muestra la sesión de usuario y la solicitud `GET /api/reservations/mias` desde el dominio de producción. En **Request Headers** se ve `Authorization: Bearer`; el valor del token quedó fuera del recorte para no publicarlo.
 
-Para tomarla: inicia sesión como usuario, abre las herramientas del navegador con `F12`, selecciona **Network/Red**, entra a **Mis reservas**, abre la solicitud `reservations/mias` y revisa **Headers → Request Headers**. Guarda la captura en `docs/captura-network.png` y añádela al repositorio. **La imagen debe anexarse desde una sesión real de evaluación; no se incluye una captura inventada ni una que revele el token.**
-
-Cuando exista el archivo, se mostrará aquí:
-
-```markdown
 ![Petición protegida con Authorization en Network](docs/captura-network.png)
-```
+
