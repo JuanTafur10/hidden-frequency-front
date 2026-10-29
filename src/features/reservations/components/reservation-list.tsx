@@ -6,7 +6,7 @@ import { Pagination } from "@/features/common/components/pagination";
 const dateFormat = new Intl.DateTimeFormat("es-CO", { dateStyle: "medium", timeStyle: "short" });
 
 export function ReservationList({ scope = "mine" }: { scope?: "mine" | "all" }) {
-  const { page, result, error, loading } = useReservations(scope);
+  const { result, error, loading } = useReservations(scope);
   const heading = scope === "mine" ? "Mis reservas" : "Solicitudes recibidas";
   const anchor = scope === "mine" ? "mis-reservas" : "solicitudes";
 
