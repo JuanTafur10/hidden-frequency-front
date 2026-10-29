@@ -12,7 +12,8 @@ export async function proxy(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const claims = token ? readClaims(token) : null;
   const notExpired = Boolean(claims?.id && claims.exp && claims.exp * 1000 > Date.now());
-  const active = notExpired && token ? await verifySession(token) : false;
+  const verification = notExpired && token ? await verifySession(token) : false;
+  const active = notExpired && Boolean(token) && verification !== false;
   const isAdminPage = path.startsWith("/admin");
   const isUserPage = path.startsWith("/mis-reservas");
   const isAuthPage = path === "/login" || path === "/registro";
@@ -32,15 +33,16 @@ export async function proxy(request: NextRequest) {
   return response;
 }
 
-async function verifySession(token: string): Promise<boolean> {
+async function verifySession(token: string): Promise<boolean | null> {
   try {
     const response = await fetch(`${API_BASE_URL}/api/reservations/mias?page=1&limit=1`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
       signal: AbortSignal.timeout(3000)
     });
-    return response.ok;
-  } catch { return false; }
+    if (response.status === 401) return false;
+    return response.ok ? true : null;
+  } catch { return null; }
 }
 
 function clearSession(response: NextResponse) {
