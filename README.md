@@ -71,7 +71,7 @@ Los componentes no llaman directamente al backend. Las pantallas usan hooks; los
 
 Al ingresar, el formulario envía el correo y la contraseña al servicio de autenticación. Next envía la solicitud al backend. Si los datos son correctos, el backend devuelve un JWT y los datos públicos del usuario. Next guarda el JWT en una cookie y devuelve el perfil al frontend. Al refrescar, la aplicación recupera el perfil de sesión desde esa cookie. Las solicitudes posteriores añaden automáticamente Authorization: Bearer al encabezado y Next reenvía el token a la API.
 
-proxy.ts revisa que la cookie exista, que no haya vencido y qué rol indica para decidir si muestra /mis-reservas o /admin. Es una protección de navegación para la experiencia de uso. La API vuelve a comprobar la firma del token y los permisos antes de entregar o cambiar datos.
+proxy.ts comprueba el vencimiento del token y valida su firma con una ruta privada del backend antes de mostrar /mis-reservas o /admin. También revisa el rol para decidir si permite entrar al panel. La API vuelve a comprobar el token y los permisos antes de entregar o cambiar datos.
 
 ### Dónde queda el token y qué riesgo tiene
 

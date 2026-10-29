@@ -1,5 +1,7 @@
 "use client";
 
+import { SESSION_COOKIE } from "./config";
+
 export interface ApiValidationIssue { field: string; message: string }
 interface ErrorResponse { error?: string; code?: string; details?: ApiValidationIssue[] }
 
@@ -12,8 +14,9 @@ export class HttpError extends Error {
 
 function getSessionToken(): string | null {
   if (typeof document === "undefined") return null;
-  const entry = document.cookie.split(";").map((value) => value.trim()).find((value) => value.startsWith("hf_session="));
-  return entry ? decodeURIComponent(entry.slice("hf_session=".length)) : null;
+  const cookiePrefix = `${SESSION_COOKIE}=`;
+  const entry = document.cookie.split(";").map((value) => value.trim()).find((value) => value.startsWith(cookiePrefix));
+  return entry ? decodeURIComponent(entry.slice(cookiePrefix.length)) : null;
 }
 
 export async function http<T>(path: string, init: RequestInit = {}): Promise<T> {
