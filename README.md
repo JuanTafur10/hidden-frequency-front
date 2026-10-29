@@ -1,86 +1,99 @@
-# Hidden Frequency
+# Hidden Frequency — frontend
 
-link al sitio en vercel: https://hidden-frequency.vercel.app/
+Tienda de vinilos, pedales e instrumentos musicales. Esta es la versión de la Entrega 1 reconstruida con Next.js, TypeScript y Tailwind. El catálogo y las reservas se consultan y guardan mediante el backend de Hidden Frequency.
 
----
+## Enlaces
 
-## Descrioción del proyecto:
+- Sitio en Vercel: https://hidden-frequency.vercel.app
+- API en Render: pendiente de pegar la URL pública del servicio hidden-frequency-back.
+- Backend: https://github.com/JuanTafur10/hidden-frequency-back
 
-**Qué es:** Hidden Frequency es una plataforma web (tienda en linea) tipo catalogo electrónico enfocada en la venta y reserva de equipo musical (como vinilos, intrumentos, pedales) de una amplia variedad
+Confirma que el enlace de Vercel corresponda a este frontend Next.js y no a la versión anterior. Para completar el enlace de la API, abre el servicio en Render, copia su URL pública y úsala como NEXT_PUBLIC_API_HOST, sin añadir /api.
 
-**Para quien es:** Esta pagina es diseñada para musicos, coleccionestas, guitarristas y aficionados de la musica y al sonido analogico que estan buscando explorar equipo especializado de una forma rapida y directa
+## Ejecutar en tu computador
 
-**Que problema resuelve:** El problema que resuelve hidden frequency, es que centraliza la visualizacion de productos y el contacto / reserva de forma limpia, rapida y rigera, esto sin la pesadez de frameworks o tiendas que son sobrecargadas, ofreciendo una experiencia de navegacion agil tanto en celulares como en computadores
+Necesitas Node.js 20.19 o superior y tener el backend de Hidden Frequency activo.
 
----
+1. Abre PowerShell en esta carpeta.
+2. Instala los paquetes:
 
-## Capturas de pantalla
+    npm install
 
-### Vista desde un computador
+3. Crea tu archivo local de configuración:
 
-<img width="1920" height="991" alt="image" src="https://github.com/user-attachments/assets/ad64c341-7394-407e-b3c6-1505ffc40696" />
+    Copy-Item .env.example .env.local
 
-<img width="1920" height="804" alt="image" src="https://github.com/user-attachments/assets/1be4d1c1-451a-44d1-b0cd-1f462d5eb4c9" />
+4. Abre .env.local y confirma esta dirección para desarrollo:
 
-<img width="1920" height="991" alt="image" src="https://github.com/user-attachments/assets/54671578-de2d-4b68-be00-d3c469605ffa" />
+    NEXT_PUBLIC_API_HOST=http://localhost:3001
 
-<img width="1920" height="991" alt="image" src="https://github.com/user-attachments/assets/64542b7b-cc5b-4568-bcbf-f3ee5449738c" />
+5. Inicia el frontend:
 
-<img width="1920" height="996" alt="image" src="https://github.com/user-attachments/assets/35c10b2c-ff21-41ad-8c95-a5212e9c7d50" />
+    npm run dev
 
-<img width="1920" height="874" alt="image" src="https://github.com/user-attachments/assets/bee1a113-d4a5-4fe9-9769-13f384330834" />
+6. Abre http://localhost:3000.
 
-### Vista desde un celular
+Para generar una versión de producción local ejecuta npm run build y luego npm start. No subas .env.local a GitHub.
 
-<img width="1179" height="2556" alt="image" src="https://github.com/user-attachments/assets/266af4b0-9732-49a6-a04c-a8c8c57b4609" />
+## Variables de entorno
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 00 PM (1)" src="https://github.com/user-attachments/assets/e1c898e1-7ca8-49dc-80bc-22b07d38dbb4" />
+| Variable | Uso |
+| --- | --- |
+| NEXT_PUBLIC_API_HOST | Dirección base del backend. En local suele ser http://localhost:3001; en Vercel, la URL pública HTTPS del servicio Render, sin /api. |
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 00 PM (2)" src="https://github.com/user-attachments/assets/6ae91816-a1b0-4a23-b6b8-ca667bf8210c" />
+En Vercel agrega NEXT_PUBLIC_API_HOST en las variables del proyecto y vuelve a desplegar. El backend debe tener FRONTEND_URL configurada con el dominio exacto de este sitio.
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM" src="https://github.com/user-attachments/assets/e853cfcc-0fa8-4824-b741-32c09b0e87c9" />
+Cuando Vercel esté conectado a este repositorio, los pushes a main deben actualizar el sitio automáticamente. Comprueba que la integración de GitHub y el despliegue automático estén habilitados.
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (1)" src="https://github.com/user-attachments/assets/623feca8-aae4-4089-b90a-06ce55fc6091" />
+## Cuentas de demostración
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (2)" src="https://github.com/user-attachments/assets/287aaff4-de8d-43bb-83c0-83771cb183ad" />
+Estas cuentas son únicamente para el ambiente de evaluación. Configura los valores equivalentes en las variables SEED_ADMIN_* y SEED_USER_* del backend y ejecuta el seed. Si el backend tiene otras credenciales configuradas, actualiza esta tabla para que coincida.
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (3)" src="https://github.com/user-attachments/assets/d3088ad3-e52c-4ebf-a0e2-d47a9cfb3824" />
+| Rol | Correo | Contraseña |
+| --- | --- | --- |
+| Admin | admin@hidden-frequency.test | HF-Admin-Demo-2026! |
+| User | usuario@hidden-frequency.test | HF-Usuario-Demo-2026! |
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (4)" src="https://github.com/user-attachments/assets/eae5cd6d-3569-41f2-9594-7ce6290a1cd7" />
+## Cómo está organizado
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (5)" src="https://github.com/user-attachments/assets/9dbffec4-ac82-4b3e-aa82-ed67c11fff42" />
+- app contiene las rutas. Sus páginas montan los componentes de cada vista.
+- src/features/common contiene configuración, cliente HTTP, navegación, tema y paginación compartida.
+- src/features/auth contiene tipos, servicios, sesión, registro e inicio de sesión.
+- src/features/products contiene tipos, consultas, filtros, tarjetas y administración de productos.
+- src/features/reservations contiene tipos, servicios, formulario y consulta de reservas.
+- src/features/storefront compone la portada y conecta el catálogo con el formulario.
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (6)" src="https://github.com/user-attachments/assets/a78cc88f-956b-4141-a3f4-7bc417af298b" />
+Los componentes no llaman directamente al backend. Las pantallas usan hooks; los hooks usan servicios; y las solicitudes pasan por el cliente HTTP común.
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (7)" src="https://github.com/user-attachments/assets/9b4d500f-0c5c-437b-8fda-45dd88ee5438" />
+## Decisiones explicadas
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (8)" src="https://github.com/user-attachments/assets/6b204330-f512-4427-a683-60d7454903f8" />
+### Inicio de sesión y rutas protegidas
 
-<img width="1179" height="2556" alt="WhatsApp Image 2026-09-13 at 7 30 01 PM (9)" src="https://github.com/user-attachments/assets/dc7071cb-94b5-4842-88d6-e206aea0a490" />
+Al ingresar, el formulario envía el correo y la contraseña al servicio de autenticación. Next envía la solicitud al backend. Si los datos son correctos, el backend devuelve un JWT y los datos públicos del usuario. Next guarda el JWT en una cookie y devuelve el perfil al frontend. Al refrescar, la aplicación recupera el perfil de sesión desde esa cookie. Las solicitudes posteriores añaden automáticamente Authorization: Bearer al encabezado y Next reenvía el token a la API.
 
----
+proxy.ts revisa que la cookie exista, que no haya vencido y qué rol indica para decidir si muestra /mis-reservas o /admin. Es una protección de navegación para la experiencia de uso. La API vuelve a comprobar la firma del token y los permisos antes de entregar o cambiar datos.
 
-## Decisiones tecnicas
+### Dónde queda el token y qué riesgo tiene
 
-### ¿Dónde usé Flexbox y dónde Grid, y por qué en cada caso?
+El JWT queda en la cookie hf_session para que sobreviva al refrescar y lo pueda leer proxy.ts. La cookie es Secure en producción y usa SameSite=Lax. También es legible desde JavaScript porque el cliente HTTP necesita poner el token en Authorization; esto permite ver la petición protegida en la pestaña Network. El riesgo es que un ataque XSS podría leer el token mientras siga vigente. Por eso la interfaz evita insertar contenido HTML no confiable y el backend valida cada operación protegida. No copies el token de la pestaña Network ni lo publiques.
 
-* **Flexbox** lo utilicé en elementos unidimensionales como: la barra de navegación del `header`, los botones de filtro por categorías y la distribución interna de las tarjetas de producto. Estos mismo me permitieron alinear elementos en fila o columna de manera flexible y limpia.
-* **CSS Grid** lo utilicé específicamente para el contenedor principal del catálogo (`#catalog-grid`). Al usar algunas propiedades como `grid-template-columns: repeat(auto-fit, minmax(...))`, logré que la cuadrícula de productos se reorganizara sola de forma responsiva sin necesidad de escribir logica de codigo compleja para cada número de columnas.
+### Diferencia entre 401 y 403
 
-### Uso de Inteligencia Artificial (IA)
+401 significa que la solicitud no trae un token válido, o que el token venció. El cliente HTTP limpia la sesión y lleva al usuario a /login. 403 significa que el token corresponde a un usuario conectado, pero su rol no tiene permiso. Por ejemplo, si un usuario normal intenta eliminar un producto, el backend responde 403; si hace la misma solicitud sin token, responde 401.
 
-* Utilicé la IA como herramienta de consulta y asistencia para resolver dudas puntuales de sintaxis en JavaScript (como el filtrado de arrays) y para refinar buenas prácticas de accesibilidad y semántica en CSS. Todo el código resultante fue revisado, adaptado, integrado y probado línea por línea de forma manual para asegurar el dominio total de la lógica implementada.
+### Uso de IA
 
-### Lo más difícil y cómo lo resolví
+Usé IA como apoyo para organizar la migración por features, conectar los servicios con la API y revisar los errores de compilación y tipos. Contrasté las rutas y los campos con el backend y ajusté el código cuando los datos reales no coincidían con ejemplos iniciales. Las decisiones y la revisión final del proyecto son mías.
 
-* Lo más complejo del codigo y el proyecto en general fue mantener la sincronización visual y de datos al momento de filtrar dinámicamente las tarjetas del catálogo sin que perdieran los estilos ni generaran saltos bruscos en el diseño. Lo resolví separando la fuente de datos (`products.js`) de la función de renderizado: cada vez que el usuario hace clic en un filtro, la función limpia el contenedor y vuelve a inyectar únicamente los elementos filtrados del array original.
+## Captura de Network pendiente
 
----
+Después de conectar el frontend con la API desplegada:
 
-## Tecnologías utilizadas
+1. Inicia sesión en el sitio.
+2. Abre las herramientas del navegador con F12 y selecciona Network/Red.
+3. Entra a Mis reservas. Abre la solicitud GET de /api/reservations/mias.
+4. En Headers/Encabezados, dentro de Request Headers, comprueba Authorization: Bearer ….
+5. Oculta el valor del token y guarda la captura en docs/captura-network.png.
+6. Añade aquí la imagen: ![Petición protegida en Network](docs/captura-network.png).
 
-* **HTML5** (Semántico)
-* **CSS3** (Variables CSS / Custom Properties, Flexbox, CSS Grid, Media Queries)
-* **JavaScript (Vanilla)** (ES6+, DOM Manipulation, Event Listeners)
-* **Vercel** (Despliegue continuo conectado a GitHub)
-* **Github** (Versionamiento)
+La captura aún no está incluida porque depende del despliegue del frontend conectado a la API. Las credenciales de evaluación deben ser las cuentas de demostración preparadas por el seed del backend; no uses credenciales personales.
