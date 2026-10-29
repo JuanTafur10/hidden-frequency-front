@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Page } from "@/features/common/domain/pagination";
 import { HttpError } from "@/features/common/http";
-import type { Reservation } from "../domain/reservation";
+import type { Reservation, ReservationUpdateInput } from "../domain/reservation";
 import { reservationService } from "../services/reservation-service";
 
 interface ReservationsState { key: string; result?: Page<Reservation>; error?: string }
@@ -27,5 +27,13 @@ export function useReservations(scope: "mine" | "all") {
   }, [page, query, scope]);
 
   const refresh = useCallback(() => setRevision((value) => value + 1), []);
-  return { page, result: state.key === query ? state.result : undefined, error: state.key === query ? state.error : undefined, loading: state.key !== query, refresh };
+  const update = useCallback(async (id: string, input: ReservationUpdateInput) => {
+    await reservationService.update(id, input);
+    refresh();
+  }, [refresh]);
+  const remove = useCallback(async (id: string) => {
+    await reservationService.remove(id);
+    refresh();
+  }, [refresh]);
+  return { page, result: state.key === query ? state.result : undefined, error: state.key === query ? state.error : undefined, loading: state.key !== query, refresh, update, remove };
 }
